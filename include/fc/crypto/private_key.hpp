@@ -9,17 +9,19 @@
 namespace fc { namespace crypto {
 
    namespace config {
+      constexpr const char* private_key_legacy_prefix_yosemite = "YPV";
       constexpr const char* private_key_base_prefix = "PVT";
       constexpr const char* private_key_prefix[] = {
          "K1",
-         "R1"
+         "R1",
+         "K1"
       };
    };
 
    class private_key
    {
       public:
-         using storage_type = static_variant<ecc::private_key_shim, r1::private_key_shim>;
+         using storage_type = static_variant<ecc::private_key_shim, r1::private_key_shim, ecc::yosemite_private_key_shim>;
 
          private_key() = default;
          private_key( private_key&& ) = default;
@@ -30,7 +32,7 @@ namespace fc { namespace crypto {
          signature      sign( const sha256& digest, bool require_canonical = true ) const;
          sha512         generate_shared_secret( const public_key& pub ) const;
 
-         template< typename KeyType = ecc::private_key_shim >
+         template< typename KeyType = ecc::yosemite_private_key_shim >
          static private_key generate() {
             return private_key(storage_type(KeyType::generate()));
          }
@@ -40,7 +42,7 @@ namespace fc { namespace crypto {
             return private_key(storage_type(KeyType::generate()));
          }
 
-         template< typename KeyType = ecc::private_key_shim >
+         template< typename KeyType = ecc::yosemite_private_key_shim >
          static private_key regenerate( const typename KeyType::data_type& data ) {
             return private_key(storage_type(KeyType(data)));
          }

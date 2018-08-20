@@ -92,18 +92,29 @@ namespace fc { namespace crypto {
    {
       const auto pivot = base58str.find('_');
 
-      if (pivot == std::string::npos) {
-         // wif import
-         using default_type = private_key::storage_type::template type_at<0>;
-         return private_key::storage_type(from_wif<default_type>(base58str));
-      } else {
-         constexpr auto prefix = config::private_key_base_prefix;
+      if (pivot != std::string::npos) {
+
          const auto prefix_str = base58str.substr(0, pivot);
-         FC_ASSERT(prefix == prefix_str, "Private Key has invalid prefix: ${str}", ("str", base58str)("prefix_str", prefix_str));
+
+         constexpr auto legacy_prefix_yosemite = config::private_key_legacy_prefix_yosemite;
+         if (prefix_str == legacy_prefix_yosemite) {
+            // wif import (YOSEMITE private key)
+            using yosemite_pvt_key_type = private_key::storage_type::template type_at<2>;
+            auto wif_str = base58str.substr(pivot + 1);
+            return private_key::storage_type(from_wif<yosemite_pvt_key_type>(wif_str));
+         }
+
+         constexpr auto base_prefix = config::private_key_base_prefix;
+         FC_ASSERT(base_prefix == prefix_str, "Private Key has invalid prefix: ${str}", ("str", base58str)("prefix_str", prefix_str));
 
          auto data_str = base58str.substr(pivot + 1);
          FC_ASSERT(!data_str.empty(), "Private Key has no data: ${str}", ("str", base58str));
          return base58_str_parser<private_key::storage_type, config::private_key_prefix>::apply(data_str);
+
+      } else {
+         // wif import (EOS private key)
+         using eos_pvt_key_type = private_key::storage_type::template type_at<0>;
+         return private_key::storage_type(from_wif<eos_pvt_key_type>(base58str));
       }
    }
 
@@ -115,9 +126,14 @@ namespace fc { namespace crypto {
    {
       auto which = _storage.which();
 
+      if (which == 2) {
+         using yosemite_pvt_key_type = storage_type::template type_at<2>;
+         return std::string(config::private_key_legacy_prefix_yosemite) + "_" + to_wif(_storage.template get<yosemite_pvt_key_type>());
+      }
+
       if (which == 0) {
-         using default_type = storage_type::template type_at<0>;
-         return to_wif(_storage.template get<default_type>());
+         using eos_pvt_key_type = storage_type::template type_at<0>;
+         return to_wif(_storage.template get<eos_pvt_key_type>());
       }
 
       auto data_str = _storage.visit(base58str_visitor<storage_type, config::private_key_prefix>());
