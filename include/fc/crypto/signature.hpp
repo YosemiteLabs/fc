@@ -7,17 +7,19 @@
 
 namespace fc { namespace crypto {
    namespace config {
+      constexpr const char* signature_legacy_prefix_yosemite = "YSG";
       constexpr const char* signature_base_prefix = "SIG";
       constexpr const char* signature_prefix[] = {
          "K1",
-         "R1"
+         "R1",
+         "K1"
       };
    };
 
    class signature
    {
       public:
-         using storage_type = static_variant<ecc::signature_shim, r1::signature_shim>;
+         using storage_type = static_variant<ecc::signature_shim, r1::signature_shim, ecc::yosemite_signature_shim>;
 
          signature() = default;
          signature( signature&& ) = default;
