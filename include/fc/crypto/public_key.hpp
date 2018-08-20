@@ -8,18 +8,21 @@
 
 namespace fc { namespace crypto {
    namespace config {
-      constexpr const char* public_key_legacy_prefix = "EOS";
+      constexpr const int   public_key_first_prefix_size = 3;
+      constexpr const char* public_key_legacy_prefix_yosemite = "YOS";
+      constexpr const char* public_key_legacy_prefix_eos = "EOS";
       constexpr const char* public_key_base_prefix = "PUB";
       constexpr const char* public_key_prefix[] = {
          "K1",
-         "R1"
+         "R1",
+         "K1"
       };
    };
 
    class public_key
    {
       public:
-         using storage_type = static_variant<ecc::public_key_shim, r1::public_key_shim>;
+         using storage_type = static_variant<ecc::public_key_shim, r1::public_key_shim, ecc::yosemite_public_key_shim>;
 
          public_key() = default;
          public_key( public_key&& ) = default;
