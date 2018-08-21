@@ -1425,6 +1425,12 @@ void connection<config>::handle_write_http_response(lib::error_code const & ec) 
 
         if (m_response.get_status_code() >= http::status_code::bad_request || is_close_request()) {
             this->terminate(m_ec);
+        } else {
+            // clear HTTP states to the initial ones and call HTTP handler
+            m_internal_state = istate::READ_HTTP_REQUEST;
+            m_request = request_type();
+            m_response = response_type();
+            this->read_handshake(1);
         }
         return;
     }
