@@ -1491,7 +1491,7 @@ private:
     }
 
     bool is_close_request();
-    bool is_close_respone();
+    bool is_close_response();
 
     // internal handler functions
     read_handler            m_handle_read_frame;
