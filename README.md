@@ -1,4 +1,4 @@
-fc by Yosemite X Inc.
+fc for YOSEMITE
 ==
 
 FC stands for fast-compiling c++ library and provides a set of utility libraries useful
