@@ -70,7 +70,7 @@ namespace fc { namespace crypto {
 
          checksummed_data<yosemite_sig_data_type> wrapper;
          wrapper.data = _storage.get<yosemite_sig_type>().serialize();
-         auto prefix_k1 = config::signature_prefix[0];
+         auto prefix_k1 = config::signature_prefix[2];
          wrapper.check = checksummed_data<yosemite_sig_data_type>::calculate_checksum(wrapper.data, prefix_k1);
          auto packed = raw::pack( wrapper );
 
