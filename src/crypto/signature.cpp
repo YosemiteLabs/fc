@@ -32,7 +32,7 @@ namespace fc { namespace crypto {
          const auto pivot_curve_type = curve_type_sig_str.find('_');
          FC_ASSERT(pivot_curve_type != std::string::npos, "No delimiter in data, cannot determine suite type: ${str}", ("str", base58str));
 
-         auto prefix_k1 = config::signature_prefix[1];
+         auto prefix_k1 = config::signature_prefix[2];
          const auto curve_type_prefix_str = curve_type_sig_str.substr(0, pivot_curve_type);
          FC_ASSERT(curve_type_prefix_str == prefix_k1, "secp256k1 curve should be usded for yosemite signature storage type");
 
