@@ -1218,6 +1218,7 @@ lib::error_code connection<config>::process_handshake_request() {
 
         return lib::error_code();
     }
+    m_is_http = false;
 
     lib::error_code ec = m_processor->validate_handshake(m_request);
 
@@ -1430,6 +1431,8 @@ void connection<config>::handle_write_http_response(lib::error_code const & ec) 
             m_internal_state = istate::READ_HTTP_REQUEST;
             m_request = request_type();
             m_response = response_type();
+            m_uri.reset();
+            m_ec = 0;
             this->read_handshake(1);
         }
         return;

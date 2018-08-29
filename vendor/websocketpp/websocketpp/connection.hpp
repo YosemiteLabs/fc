@@ -1492,6 +1492,9 @@ private:
 
     bool is_close_request();
     bool is_close_response();
+    bool is_http_connection() {
+        return m_is_http;
+    }
 
     // internal handler functions
     read_handler            m_handle_read_frame;
