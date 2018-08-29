@@ -12,3 +12,4 @@ for the development of asynchronous libraries.  Some of the highlights include:
  - Logging Infrastructure 
  - Wraps many Boost APIs, such as boost::filesystem, boost::thread, and boost::exception to acceleate compiles
  - Support for unofficial Boost.Process library.
+ - Support HTTP/1.1 keep-alive mode on this version of websocketpp
