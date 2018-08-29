@@ -1432,7 +1432,6 @@ void connection<config>::handle_write_http_response(lib::error_code const & ec) 
             m_request = request_type();
             m_response = response_type();
             m_uri.reset();
-            m_ec = 0;
             this->read_handshake(1);
         }
         return;
