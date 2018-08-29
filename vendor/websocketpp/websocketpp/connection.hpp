@@ -1358,6 +1358,10 @@ public:
         m_connection_hdl = hdl;
         transport_con_type::set_handle(hdl);
     }
+
+    bool is_http_connection() {
+        return m_is_http;
+    }
 protected:
     void handle_transport_init(lib::error_code const & ec);
 
@@ -1492,9 +1496,6 @@ private:
 
     bool is_close_request();
     bool is_close_response();
-    bool is_http_connection() {
-        return m_is_http;
-    }
 
     // internal handler functions
     read_handler            m_handle_read_frame;
