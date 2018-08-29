@@ -1432,6 +1432,7 @@ void connection<config>::handle_write_http_response(lib::error_code const & ec) 
             m_request = request_type();
             m_response = response_type();
             m_uri.reset();
+            m_http_state = session::http_state::init;
             this->read_handshake(1);
         }
         return;
@@ -1784,6 +1785,11 @@ void connection<config>::handle_terminate(terminate_status tstat,
         if (m_ec != error::http_connection_ended) {
             if (m_fail_handler) {
                 m_fail_handler(m_connection_hdl);
+            }
+        } else {
+            // for HTTP connection
+            if (m_close_handler) {
+                m_close_handler(m_connection_hdl);
             }
         }
     } else if (tstat == closed) {
