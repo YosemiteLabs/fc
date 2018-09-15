@@ -1,4 +1,4 @@
-fc for YOSEMITE : https://github.com/YosemiteLabs/yosemite-public-blockchain
+fc for YOSEMITE
 ==
 
 FC stands for fast-compiling c++ library and provides a set of utility libraries useful
@@ -13,3 +13,5 @@ for the development of asynchronous libraries.  Some of the highlights include:
  - Wraps many Boost APIs, such as boost::filesystem, boost::thread, and boost::exception to acceleate compiles
  - Support for unofficial Boost.Process library.
  - Support HTTP/1.1 keep-alive mode on this version of websocketpp
+
+This forked fc repository is used by [YOSEMITE Public Blockchain](https://github.com/YosemiteLabs/yosemite-public-blockchain).
