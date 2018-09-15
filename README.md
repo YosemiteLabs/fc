@@ -1,4 +1,4 @@
-fc for YOSEMITE
+fc for YOSEMITE : https://github.com/YosemiteLabs/yosemite-public-blockchain
 ==
 
 FC stands for fast-compiling c++ library and provides a set of utility libraries useful
