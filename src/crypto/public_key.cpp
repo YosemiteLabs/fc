@@ -92,9 +92,9 @@ namespace fc { namespace crypto {
       if (which == 2) {
          auto data_str = _storage.visit(base58str_visitor<storage_type, config::public_key_prefix, 2>());
          return std::string(config::public_key_legacy_prefix_yosemite) + data_str;
-      } else if (which == 0) {
-         auto data_str = _storage.visit(base58str_visitor<storage_type, config::public_key_prefix, 0>());
-         return std::string(config::public_key_legacy_prefix_eos) + data_str;
+//      } else if (which == 0) {
+//         auto data_str = _storage.visit(base58str_visitor<storage_type, config::public_key_prefix, 0>());
+//         return std::string(config::public_key_legacy_prefix_eos) + data_str;
       } else {
          auto data_str = _storage.visit(base58str_visitor<storage_type, config::public_key_prefix>());
          return std::string(config::public_key_base_prefix) + "_" + data_str;

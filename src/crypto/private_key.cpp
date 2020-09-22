@@ -131,10 +131,10 @@ namespace fc { namespace crypto {
          return std::string(config::private_key_legacy_prefix_yosemite) + "_" + to_wif(_storage.template get<yosemite_pvt_key_type>());
       }
 
-      if (which == 0) {
-         using eos_pvt_key_type = storage_type::template type_at<0>;
-         return to_wif(_storage.template get<eos_pvt_key_type>());
-      }
+//      if (which == 0) {
+//         using eos_pvt_key_type = storage_type::template type_at<0>;
+//         return to_wif(_storage.template get<eos_pvt_key_type>());
+//      }
 
       auto data_str = _storage.visit(base58str_visitor<storage_type, config::private_key_prefix>());
       return std::string(config::private_key_base_prefix) + "_" + data_str;

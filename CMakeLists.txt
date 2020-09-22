@@ -122,7 +122,7 @@ list(APPEND sources ${fc_headers})
 setup_library( fc SOURCES ${sources} LIBRARY_TYPE STATIC DONT_INSTALL_LIBRARY )
   
 IF(APPLE)
-  # As of 10.10 yosemite, the OpenSSL static libraries shipped with os x have a dependency
+  # As of 10.10, the OpenSSL static libraries shipped with os x have a dependency
   # on zlib, so any time you link in openssl you also need to link zlib.  .  We really want to detect whether openssl was configured with the --no-zlib
   # option or not when it was built, but that's difficult to do in practice, so we
   # just always try to link it in on mac.

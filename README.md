@@ -1,4 +1,4 @@
-fc for YOSEMITE
+fc library for InfraBlockchain
 ==
 
 FC stands for fast-compiling c++ library and provides a set of utility libraries useful
@@ -14,4 +14,4 @@ for the development of asynchronous libraries.  Some of the highlights include:
  - Support for unofficial Boost.Process library.
  - Support HTTP/1.1 keep-alive mode on this version of websocketpp
 
-This forked fc repository is used by [YOSEMITE Public Blockchain](https://github.com/YosemiteLabs/yosemite-public-blockchain).
+This forked fc repository is used by [InfraBlockchain](https://infrablockchain.com).
